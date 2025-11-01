@@ -226,17 +226,7 @@ public class Wizard extends JFrame {
             Document domDoc = db.newDocument();
             Element rootElement = domDoc.createElement("root");
             domDoc.appendChild(rootElement);
-            //for (Map.Entry<String, Object> entry : properties.entrySet()) {
-            //    Element elem = domDoc.createElement(entry.getKey());
-            //    elem.setTextContent(entry.getValue());
-            //    rootElement.appendChild(elem);
-            //}
             xmlSource = new DOMSource(domDoc);
-            //Result result = new StreamResult("test.xml");
-            //TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            //Transformer transformer = transformerFactory.newTransformer();
-            //transformer.transform(xmlSource, result);
-
 
             File confAc = new File(fProj, "configure.ac");
             xslt("configure_ac.xsl", confAc);
