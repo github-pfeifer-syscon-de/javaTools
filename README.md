@@ -1,7 +1,7 @@
 # javaTools
-some tools that help me build Gtk-projects using mostly Java8/xslt
+some tools that help me build Gtk-projects using Java8/xslt
 
-To run use your favorite IDE or use Maven (requires install)
+To run use your favorite IDE or Maven (requires install)
 <pre>
  mvn exec:java -Dexec.mainClass="de.pfeifer_syscon.proj.Wizard"
 </pre>
