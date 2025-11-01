@@ -30,8 +30,9 @@
 #include &lt;iomanip&gt;
 #include &lt;locale&gt;
 #include &lt;clocale&gt;
+#include &lt;glibmm.h&gt;
 
-#include "config.h"
+// #include "config.h" use with autotools
 
 static bool
 testEval()

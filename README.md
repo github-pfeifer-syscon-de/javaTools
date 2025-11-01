@@ -11,13 +11,19 @@ previous version will be saved within .save.
 
 Wizard is a Gtk/autotools project generator that
 will create a starting project from some
-defaults see lines ~275 (you want to change these!).
+defaults see lines Wizard.java:275f (you want to change these!).
 After using the create function use
-the usual steps:
+the usual steps for autotools:
 <pre>
 autoreconf -fis
 ./configure --prefix=/usr
 </pre>
-should be sufficent to get you stated with a simple Gtk project.
+that gets you started with a basic Gtk project.
+As an alternative meson may be prefere it:
+<pre>
+meson setup build
+cd build
+meson compile
+</pre>
 The wizard relies mostly on xslt-scripts so if youre
 not a java user they might be portable to your favorite language.

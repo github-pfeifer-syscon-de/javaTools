@@ -176,6 +176,8 @@ public class Wizard extends JFrame {
             xslt("abt-dlg_ui.xsl", abtDlg);
             File appWin = new File(res, "app-win.ui");
             xslt("app-win_ui.xsl", appWin);
+            File mesonBld = new File(res, "meson.build");
+            xslt("res_meson_build.xsl", mesonBld);
         }
 
         protected void createSrc() throws Exception  {
@@ -191,6 +193,8 @@ public class Wizard extends JFrame {
             xslt("winCpp.xsl", winSrc);
             File winHpp = new File(src, properties.get(CLASSWIN) + ".hpp");
             xslt("winHpp.xsl", winHpp);
+            File mesonBld = new File(src, "meson.build");
+            xslt("src_meson_build.xsl", mesonBld);
         }
 
         protected void createTest() throws Exception  {
@@ -240,6 +244,8 @@ public class Wizard extends JFrame {
             touch(news, "");
             File readme = new File(fProj, "README");
             touch(readme, "");
+            File mesonBld = new File(fProj, "meson.build");
+            xslt("meson_build.xsl", mesonBld);
             createSrc();
             createRes();
             createTest();

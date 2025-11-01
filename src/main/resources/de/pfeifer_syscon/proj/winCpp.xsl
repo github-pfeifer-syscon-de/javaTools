@@ -34,7 +34,7 @@
 #include &lt;clocale&gt;
 #include &lt;string_view&gt;
 
-#include "config.h"
+// #include "config.h" use with autotools
 #include "</xsl:text><xsl:value-of select="concat($classApp,'.hpp')"/><xsl:text>"
 
 </xsl:text><xsl:value-of select="concat($classWin,'::',$classWin)"/><xsl:text>(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; refBuilder, </xsl:text><xsl:value-of select="$classApp"/><xsl:text>* application)
