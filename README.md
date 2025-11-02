@@ -1,7 +1,7 @@
 # javaTools
-some tools that help me build Gtk-projects using Java8/xslt
+some tools that help me build Gtkmm3-projects using Java8/xslt
 
-To run use your favorite IDE or Maven (requires install)
+To run use your favorite IDE or Maven (requires install) e.g.
 <pre>
  mvn exec:java -Dexec.mainClass="de.pfeifer_syscon.proj.Wizard"
 </pre>
@@ -9,7 +9,7 @@ To run use your favorite IDE or Maven (requires install)
 Finder is a search and replace over multiple files,
 previous version will be saved within .save.
 
-Wizard is a Gtk/autotools project generator that
+Wizard is a Gtkmm3/autotools project generator that
 will create a starting project from some
 defaults see lines Wizard.java:275f (you want to change these!).
 After using the create function use
@@ -18,8 +18,8 @@ the usual steps for autotools:
 autoreconf -fis
 ./configure --prefix=/usr
 </pre>
-that gets you started with a basic Gtk project.
-As an alternative meson may be prefere it:
+that gets you started with a basic Gtkmm3 project.
+As an alternative meson may be used:
 <pre>
 meson setup build
 cd build
