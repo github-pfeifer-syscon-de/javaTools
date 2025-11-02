@@ -7,6 +7,7 @@
         <xsl:apply-templates/>
    </xsl:template>
 
+// this might be helpful: https://mesonbuild.com/Porting-from-autotools.html
    <xsl:template match="root">
 <xsl:text># use with:
 # meson setup build
@@ -17,13 +18,25 @@ project('</xsl:text><xsl:value-of select="$Proj"/><xsl:text>', 'c', 'cpp', defau
 
 subdir('res')
 subdir('src')
+subdir('test')
 
-genericimg_dep = dependency('genericimg')
+conf = configuration_data()
+as_version = '</xsl:text><xsl:value-of select="$version"/><xsl:text>'
+# Surround the version in quotes to make it a C string
+conf.set_quoted('VERSION', as_version)
+configure_file(output : 'config.h',
+               configuration : conf)
+
+# genericimg_dep = dependency('genericimg', version : '>= 0.4.0')
+gtkmm3_dep = dependency('gtkmm-3.0')
+glibmm2_dep = dependency('glibmm-2.4')
 thread_dep = dependency('threads')
+
+deps = [gtkmm3_dep, glibmm2_dep, thread_dep ]
 
 executable(meson.project_name()
     , sources, app_resources
-    , dependencies: [genericimg_dep, thread_dep ])
+    , dependencies: deps)
 </xsl:text>
    </xsl:template>
 </xsl:stylesheet>

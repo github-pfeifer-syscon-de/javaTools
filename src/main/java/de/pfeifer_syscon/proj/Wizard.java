@@ -204,6 +204,8 @@ public class Wizard extends JFrame {
             xslt("testMakefile_am.xsl", testMake);
             File testSrc = new File(test, properties.get(PROJ) + "_test.cpp");
             xslt("testCpp.xsl", testSrc);
+            File mesonBld = new File(test, "meson.build");
+            xslt("test_meson_build.xsl", mesonBld);
         }
 
         protected void createM4() throws Exception {

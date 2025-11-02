@@ -32,7 +32,7 @@
 #include &lt;clocale&gt;
 #include &lt;glibmm.h&gt;
 
-// #include "config.h" use with autotools
+// #include "config.h" 
 
 static bool
 testEval()

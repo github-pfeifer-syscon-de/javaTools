@@ -16,7 +16,7 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_INIT([</xsl:text><xsl:value-of select="$proj"/><xsl:text>],[</xsl:text><xsl:value-of select="$version"/><xsl:text>],[</xsl:text><xsl:value-of select="$mail"/><xsl:text>])
 
 dnl point to unique-file-in-source-dir, for safety check
-dnl AC_CONFIG_SRCDIR([src/</xsl:text><xsl:value-of select="$classApp"/><xsl:text>.cpp])
+AC_CONFIG_SRCDIR([src/</xsl:text><xsl:value-of select="$classApp"/><xsl:text>.cpp])
 
 dnl foreign -> leaves out INSTALL,
 dnl otherwise -> there is complaining about the shell, sorry for all non shell places :(
@@ -37,10 +37,10 @@ AC_CANONICAL_HOST
 AC_MSG_NOTICE([host_os $host_os])
 
 dnl don't repeat dependencies
-dnl PKG_CHECK_MODULES([GTKMM], [gtkmm-3.0])
-dnl PKG_CHECK_MODULES([GLIBMM], [glibmm-2.4 giomm-2.4])
+PKG_CHECK_MODULES([GTKMM], [gtkmm-3.0])
+PKG_CHECK_MODULES([GLIBMM], [glibmm-2.4 giomm-2.4])
 
-PKG_CHECK_MODULES([GENERICIMG],[genericimg >= 0.4.0])
+dnl PKG_CHECK_MODULES([GENERICIMG],[genericimg >= 0.4.0])
 
 dnl for nls use:
 dnl AM_GNU_GETTEXT([external])

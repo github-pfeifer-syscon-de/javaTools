@@ -28,13 +28,11 @@
 
 #include &lt;iostream&gt;
 #include &lt;exception&gt;
-#include &lt;psc_i18n.hpp&gt;
-#include &lt;psc_format.hpp&gt;
+#include &lt;format&gt;
 #include &lt;locale&gt;
 #include &lt;clocale&gt;
-#include &lt;string_view&gt;
 
-// #include "config.h" use with autotools
+#include "config.h"
 #include "</xsl:text><xsl:value-of select="concat($classApp,'.hpp')"/><xsl:text>"
 
 </xsl:text><xsl:value-of select="concat($classApp,'::',$classApp)"/><xsl:text>(int argc, char **argv)
@@ -128,7 +126,7 @@ void
     }
     catch (const Glib::Error &amp;ex) {
         std::string error = ex.what();
-        show_error(psc::fmt::format("Unable to load {} error {}", resName, error));
+        show_error(std::format("Unable to load {} error {}", resName, error));
     }
 }
 

@@ -28,13 +28,11 @@
 
 #include &lt;iostream&gt;
 #include &lt;exception&gt;
-#include &lt;psc_i18n.hpp&gt;
-#include &lt;psc_format.hpp&gt;
+#include &lt;format&gt;
 #include &lt;locale&gt;
 #include &lt;clocale&gt;
-#include &lt;string_view&gt;
 
-// #include "config.h" use with autotools
+#include "config.h" 
 #include "</xsl:text><xsl:value-of select="concat($classApp,'.hpp')"/><xsl:text>"
 
 </xsl:text><xsl:value-of select="concat($classWin,'::',$classWin)"/><xsl:text>(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; refBuilder, </xsl:text><xsl:value-of select="$classApp"/><xsl:text>* application)
