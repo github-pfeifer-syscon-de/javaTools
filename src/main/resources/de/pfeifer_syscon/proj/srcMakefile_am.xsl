@@ -16,8 +16,8 @@ AM_CPPFLAGS = \
         -DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
         -DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
 	$(GENERICIMG_CFLAGS) \
-	$(GLIBMM_LIBS) \
-	$(GTKMM_LIBS)
+	$(GLIBMM_CFLAGS) \
+	$(GTKMM_CFLAGS)
 
 </xsl:text><xsl:value-of select="$proj"/><xsl:text>_CFLAGS = -Wall
 </xsl:text><xsl:value-of select="$proj"/><xsl:text>_CXXFLAGS = -Wall \

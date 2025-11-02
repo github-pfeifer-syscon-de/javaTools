@@ -20,6 +20,7 @@ AM_CPPFLAGS = \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)."\" \
 	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
 	$(GENERICIMG_CFLAGS) \
+	$(GLIBMM_CFLAGS) \
 	-I ../src
 
 AM_CFLAGS= -Wall
@@ -33,6 +34,7 @@ AM_CXXFLAGS = \
 AM_LDFLAGS =
 
 </xsl:text><xsl:value-of select="$test_prog"/><xsl:text>_LDADD =  \
+	$(GLIBMM_LIBS) \
 	$(GENERICIMG_LIBS)
 
 </xsl:text><xsl:value-of select="$test_prog"/><xsl:text>_SOURCES = \

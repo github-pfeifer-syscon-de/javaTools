@@ -11,7 +11,7 @@
 <xsl:text>
 ## build resources
 ##   the autoreconf complains about the $(shell) construct, fix see configure.ac  -Wno-portability.
-##   But this seems the best way to keep this portable
+##   But this seems the best way to keep this portable/dry
 
 PKGCONFIG = pkg-config
 GLIB_COMPILE_RESOURCES = $(shell $(PKGCONFIG) --variable=glib_compile_resources gio-2.0)

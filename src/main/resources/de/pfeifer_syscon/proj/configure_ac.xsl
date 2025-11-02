@@ -53,9 +53,9 @@ fi
 
 AC_CONFIG_FILES([
 Makefile
-test/Makefile
 res/Makefile
 src/Makefile
+test/Makefile
 ])
 AC_OUTPUT
 </xsl:text>
