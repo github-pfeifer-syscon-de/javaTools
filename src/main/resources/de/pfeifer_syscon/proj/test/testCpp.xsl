@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
    <xsl:output method="text" />
-   <xsl:include href="param.xsl" />
+   <xsl:include href="../param.xsl" />
 
    <xsl:template match="/">
         <xsl:apply-templates/>
@@ -32,7 +32,7 @@
 #include &lt;clocale&gt;
 #include &lt;glibmm.h&gt;
 
-// #include "config.h" 
+// #include "config.h"
 
 static bool
 testEval()

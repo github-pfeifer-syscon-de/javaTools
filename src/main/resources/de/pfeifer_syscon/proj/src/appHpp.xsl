@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
    <xsl:output method="text" />
-   <xsl:include href="param.xsl" />
+   <xsl:include href="../param.xsl" />
 
    <xsl:template match="/">
         <xsl:apply-templates/>
@@ -26,35 +26,34 @@
  * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
 
-#include &lt;iostream&gt;
-#include &lt;exception&gt;
-#include &lt;format&gt;
-#include &lt;locale&gt;
-#include &lt;clocale&gt;
+#pragma once
 
-#include "config.h" 
-#include "</xsl:text><xsl:value-of select="concat($classApp,'.hpp')"/><xsl:text>"
+#include &lt;gtkmm.h&gt;
 
-</xsl:text><xsl:value-of select="concat($classWin,'::',$classWin)"/><xsl:text>(BaseObjectType* cobject, const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; refBuilder, </xsl:text><xsl:value-of select="$classApp"/><xsl:text>* application)
-: Gtk::ApplicationWindow(cobject)
-, m_application{application}
-{
-}
+#include "</xsl:text><xsl:value-of select="$classWin"/><xsl:text>.hpp"
 
-void
-</xsl:text><xsl:value-of select="$classWin"/><xsl:text>::on_hide()
-{
-    Gtk::ApplicationWindow::on_hide();
-}
+/*
+ * get the application up and running
+ *   about and help dialog
+ */
+class </xsl:text><xsl:value-of select="$classApp"/><xsl:text>
+: public Gtk::Application {
+public:
+    </xsl:text><xsl:value-of select="$classApp"/><xsl:text>(int arc, char **argv);
+    virtual ~</xsl:text><xsl:value-of select="$classApp"/><xsl:text>() = default;
 
+    void on_activate() override;
+    void on_startup() override;
+protected:
+    void build(const std::string&amp; resName, std::function&lt;void(const Glib::RefPtr&lt;Gtk::Builder&gt;&amp;)&gt; predicate);
+    void show_error(const Glib::ustring&amp; msg, Gtk::MessageType type = Gtk::MessageType::MESSAGE_WARNING);
+    void on_action_about();
+    void on_action_quit();
 
-void
-</xsl:text><xsl:value-of select="$classWin"/><xsl:text>::show_error(const Glib::ustring&amp; msg, Gtk::MessageType type)
-{
-    Gtk::MessageDialog messagedialog(*this, msg, false, type);
-    messagedialog.run();
-    messagedialog.hide();
-}
+private:
+    </xsl:text><xsl:value-of select="$classWin"/><xsl:text> *m_</xsl:text><xsl:value-of select="$classWin"/><xsl:text>;
+    //void on_action_help();
+};
 </xsl:text>
    </xsl:template>
 </xsl:stylesheet>

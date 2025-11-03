@@ -17,6 +17,7 @@ the usual steps for autotools:
 <pre>
 autoreconf -fis
 ./configure --prefix=/usr
+make
 </pre>
 that gets you started with a basic Gtkmm3 project.
 As an alternative meson may be used:
