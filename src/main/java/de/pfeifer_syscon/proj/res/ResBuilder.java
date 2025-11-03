@@ -16,6 +16,7 @@
  */
 package de.pfeifer_syscon.proj.res;
 
+import de.pfeifer_syscon.proj.BuildSystem;
 import de.pfeifer_syscon.proj.Builder;
 import java.io.File;
 import java.util.Map;
@@ -31,11 +32,10 @@ public class ResBuilder extends Builder {
     }
 
     @Override
-    public void build(File fProj) throws Exception {
+    public void build(File fProj, BuildSystem buildSystem) throws Exception {
         File res = new File(fProj, "res");
         res.mkdir();
-        File resMake = new File(res, "Makefile.am");
-        xslt("Makefile_am.xsl", resMake);
+        buildSystem.buildRes(res, this);
         File gRes = new File(res, properties.get(PROJ) + ".gresources.xml");
         xslt("gresources_xml.xsl", gRes);
         File png = new File(res, properties.get(PROJ) + ".png");
@@ -50,8 +50,6 @@ public class ResBuilder extends Builder {
         xslt("abt-dlg_ui.xsl", abtDlg);
         File appWin = new File(res, "app-win.ui");
         xslt("app-win_ui.xsl", appWin);
-        File mesonBld = new File(res, "meson.build");
-        xslt("meson_build.xsl", mesonBld);
     }
 
     @Override

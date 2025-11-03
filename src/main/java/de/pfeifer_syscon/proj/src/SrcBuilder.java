@@ -16,6 +16,7 @@
  */
 package de.pfeifer_syscon.proj.src;
 
+import de.pfeifer_syscon.proj.BuildSystem;
 import de.pfeifer_syscon.proj.Builder;
 import java.io.File;
 import java.util.Map;
@@ -32,11 +33,10 @@ public class SrcBuilder extends Builder {
 
 
     @Override
-    public void build(File fProj) throws Exception {
+    public void build(File fProj, BuildSystem buildSystem) throws Exception {
         File src = new File(fProj, "src");
         src.mkdir();
-        File srcMake = new File(src, "Makefile.am");
-        xslt("Makefile_am.xsl", srcMake);
+        buildSystem.buildSrc(src, this);
         File appSrc = new File(src, properties.get(CLASSAPP) + ".cpp");
         xslt("appCpp.xsl", appSrc);
         File appHpp = new File(src, properties.get(CLASSAPP) + ".hpp");
@@ -45,8 +45,6 @@ public class SrcBuilder extends Builder {
         xslt("winCpp.xsl", winSrc);
         File winHpp = new File(src, properties.get(CLASSWIN) + ".hpp");
         xslt("winHpp.xsl", winHpp);
-        File mesonBld = new File(src, "meson.build");
-        xslt("meson_build.xsl", mesonBld);
     }
 
     @Override

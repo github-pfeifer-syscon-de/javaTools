@@ -17,36 +17,39 @@
 package de.pfeifer_syscon.proj;
 
 import java.io.File;
-import java.util.Map;
 
 /**
  *
  * @author RPf
  */
-public class ProjBuilder extends Builder {
-
-    public ProjBuilder(Map<String, Object> properties) throws Exception {
-        super(properties);
-    }
-
+public class MesonBuild extends BuildSystem {
 
     @Override
-    public void build(File fProj, BuildSystem buildSystem) throws Exception {
-        fProj.mkdir();
-        File authors = new File(fProj, "AUTHORS");
-        touch(authors, "");
-        File changeLog = new File(fProj, "ChangeLog");
-        touch(changeLog, "");
-        File news = new File(fProj, "NEWS");
-        touch(news, "");
-        File readme = new File(fProj, "README");
-        touch(readme, "");
-        buildSystem.buildProj(fProj, this);
+    public void buildProj(File fProj, Builder builder) throws Exception {
+        File mesonBld = new File(fProj, "meson.build");
+        builder.xslt("meson_build.xsl", mesonBld);
+    }
+
+    @Override
+    public void buildSrc(File fSrc, Builder builder) throws Exception {
+        File mesonBld = new File(fSrc, "meson.build");
+        builder.xslt("meson_build.xsl", mesonBld);
+    }
+
+    @Override
+    public void buildTest(File fTest, Builder builder) throws Exception {
+        File mesonBld = new File(fTest, "meson.build");
+        builder.xslt("meson_build.xsl", mesonBld);
+    }
+
+    @Override
+    public void buildRes(File fRes, Builder builder) throws Exception {
+        File mesonBld = new File(fRes, "meson.build");
+        builder.xslt("meson_build.xsl", mesonBld);
     }
 
     @Override
     public String toString() {
-        return "project";
+        return "Meson";
     }
-
 }

@@ -44,13 +44,6 @@
 void
 </xsl:text><xsl:value-of select="$classApp"/><xsl:text>::on_activate()
 {
-    auto windows = get_windows();
-    if (windows.size() > 0) {
-        auto appwindow = dynamic_cast&lt;</xsl:text><xsl:value-of select="$classWin"/><xsl:text>*&gt;(windows[0]);
-        if (appwindow) {    // on second activation do nothing
-            return;
-        }
-    }
     build("/app-win.ui", [this] (const Glib::RefPtr&lt;Gtk::Builder&gt;&amp; builder) {
         builder->get_widget_derived("</xsl:text><xsl:value-of select="$classWin"/><xsl:text>", m_</xsl:text><xsl:value-of select="$classWin"/><xsl:text>, this);
         add_window(*m_</xsl:text><xsl:value-of select="$classWin"/><xsl:text>);

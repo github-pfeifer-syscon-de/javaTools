@@ -17,36 +17,19 @@
 package de.pfeifer_syscon.proj;
 
 import java.io.File;
-import java.util.Map;
 
 /**
  *
  * @author RPf
  */
-public class ProjBuilder extends Builder {
+public abstract class BuildSystem {
 
-    public ProjBuilder(Map<String, Object> properties) throws Exception {
-        super(properties);
-    }
+    public abstract void buildProj(File fProj, Builder builder) throws Exception;
 
+    public abstract void buildSrc(File fSrc, Builder builder) throws Exception;
 
-    @Override
-    public void build(File fProj, BuildSystem buildSystem) throws Exception {
-        fProj.mkdir();
-        File authors = new File(fProj, "AUTHORS");
-        touch(authors, "");
-        File changeLog = new File(fProj, "ChangeLog");
-        touch(changeLog, "");
-        File news = new File(fProj, "NEWS");
-        touch(news, "");
-        File readme = new File(fProj, "README");
-        touch(readme, "");
-        buildSystem.buildProj(fProj, this);
-    }
+    public abstract void buildTest(File fTest, Builder builder) throws Exception;
 
-    @Override
-    public String toString() {
-        return "project";
-    }
+    public abstract void buildRes(File fRes, Builder builder) throws Exception;
 
 }

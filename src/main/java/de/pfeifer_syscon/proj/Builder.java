@@ -105,5 +105,5 @@ public abstract class Builder implements URIResolver {
         }
     }
 
-    public abstract void build(File projDir) throws Exception;
+    public abstract void build(File projDir, BuildSystem buildSystem) throws Exception;
 }

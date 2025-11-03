@@ -16,6 +16,7 @@
  */
 package de.pfeifer_syscon.proj.m4;
 
+import de.pfeifer_syscon.proj.BuildSystem;
 import de.pfeifer_syscon.proj.Builder;
 import java.io.File;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class M4Builder extends Builder {
 
 
     @Override
-    public void build(File fProj) throws Exception {
+    public void build(File fProj, BuildSystem buildSystem) throws Exception {
         File m4 = new File(fProj, "m4");
         m4.mkdir();
         File axDebug = new File(m4, "ax_check_enable_debug.m4");

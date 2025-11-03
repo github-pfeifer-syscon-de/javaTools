@@ -16,6 +16,7 @@
  */
 package de.pfeifer_syscon.proj.test;
 
+import de.pfeifer_syscon.proj.BuildSystem;
 import de.pfeifer_syscon.proj.Builder;
 import java.io.File;
 import java.util.Map;
@@ -31,15 +32,12 @@ public class TestBuilder extends Builder {
     }
 
     @Override
-    public void build(File fProj) throws Exception {
+    public void build(File fProj, BuildSystem buildSystem) throws Exception {
         File test = new File(fProj, "test");
         test.mkdir();
-        File testMake = new File(test, "Makefile.am");
-        xslt("Makefile_am.xsl", testMake);
         File testSrc = new File(test, properties.get(PROJ) + "_test.cpp");
         xslt("testCpp.xsl", testSrc);
-        File mesonBld = new File(test, "meson.build");
-        xslt("meson_build.xsl", mesonBld);
+        buildSystem.buildTest(test, this);
     }
 
     @Override

@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -50,23 +51,12 @@ public class Wizard extends JFrame {
     {
         private Map<String, Object> properties;
         private File fProj;
+        private BuildSystem buildSystem;
 
-        protected void create() throws Exception {
-            for (Builder build : new Builder[] {
-                new ProjBuilder(properties)
-                ,new SrcBuilder(properties)
-                ,new TestBuilder(properties)
-                ,new ResBuilder(properties)
-                ,new M4Builder(properties)}) {
-                publish(String.format("Creating %s", build.toString()));
-                build.build(fProj);
-            }
-        }
-
-        @Override
-        protected Object doInBackground() throws Exception {
+        Worker() throws Exception {
             String path = dir.getText();
             String projName = proj.getText();
+            buildSystem = (BuildSystem)build.getSelectedItem();
             File fPath = new File(path);
             if (!fPath.exists()) {
                 throw new Exception(String.format("Path %s must exist", path));
@@ -89,8 +79,23 @@ public class Wizard extends JFrame {
             properties.put("year", cal.get(Calendar.YEAR));
             properties.put("author", "rpf");
             properties.put("version", "0.1");
+        }
 
-            create();
+        protected void create() throws Exception {
+
+        }
+
+        @Override
+        protected Object doInBackground() throws Exception {
+            for (Builder build : new Builder[] {
+                new ProjBuilder(properties)
+                ,new SrcBuilder(properties)
+                ,new TestBuilder(properties)
+                ,new ResBuilder(properties)
+                ,new M4Builder(properties)}) {
+                publish(String.format("Creating %s", build.toString()));
+                build.build(fProj, buildSystem);
+            }
             return new Object();
         }
 
@@ -110,13 +115,14 @@ public class Wizard extends JFrame {
             }
             catch (Exception exc) {
                 exc.printStackTrace();
-                JOptionPane.showMessageDialog(Wizard.this, String.format("Error %s", exc.getMessage()));
+                showError(exc);
             }
         }
 
     }
     private JTextField dir;
     private JTextField proj;
+    private JComboBox<BuildSystem> build;
     private JTextArea info;
     Wizard() {
         super("Wizard");
@@ -133,20 +139,37 @@ public class Wizard extends JFrame {
         gbc = new GridBagConstraints(1,1, 1,1, 1.0,0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, ins, 0,0);
         proj = new JTextField("Test");
         add(proj, gbc);
+        gbc = new GridBagConstraints(0 ,2, 1,1, 1.0,0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, ins, 0,0);
+        add(new Label("Build"), gbc);
+        build = new JComboBox<>();
+        build.addItem(new AutomakeBuild());
+        build.addItem(new MesonBuild());
+        build.setSelectedIndex(0);
         gbc = new GridBagConstraints(1,2, 1,1, 1.0,0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, ins, 0,0);
+        add(build, gbc);
+        gbc = new GridBagConstraints(1,3, 1,1, 1.0,0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, ins, 0,0);
         JButton create = new JButton("Create");
         add(create, gbc);
         create.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                Worker worker = new Worker();
-                worker.execute();
+                try {
+                    Worker worker = new Worker();
+                    worker.execute();
+                }
+                catch (Exception exc) {
+                    showError(exc);
+                }
             }
         });
         info = new JTextArea(20, 40);
-        gbc = new GridBagConstraints(0,3, 2,1, 1.0,1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH, ins, 0,0);
+        gbc = new GridBagConstraints(0,4, 2,1, 1.0,1.0, GridBagConstraints.NORTHWEST, GridBagConstraints.BOTH, ins, 0,0);
         add(new JScrollPane(info), gbc);
         pack();
+    }
+
+    public void showError(Exception exc) {
+        JOptionPane.showMessageDialog(Wizard.this, String.format("Error %s", exc.getMessage()));
     }
 
     public static void main(String[] args) {

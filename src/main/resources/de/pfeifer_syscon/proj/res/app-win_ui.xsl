@@ -12,15 +12,23 @@
 </xsl:text>
 <interface>
   <requires lib="gtk+" version="3.22"/>
-  <object class="GtkApplicationWindow">
-      <xsl:attribute name="id" >
+  <object class="GtkApplicationWindow" >
+    <xsl:attribute name="id" >
         <xsl:value-of select="$classWin"/>
-      </xsl:attribute>
-    <property name="can_focus">False</property>
+    </xsl:attribute>
+    <property name="can-focus">False</property>
     <child>
-    </child>
-    <child type="titlebar">
-      <placeholder/>
+      <object class="GtkScrolledWindow">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="shadow-type">in</property>
+        <child>
+          <object class="GtkTextView" id="text">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+          </object>
+        </child>
+      </object>
     </child>
   </object>
 </interface>

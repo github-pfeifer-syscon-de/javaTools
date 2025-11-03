@@ -39,6 +39,9 @@
 : Gtk::ApplicationWindow(cobject)
 , m_application{application}
 {
+    Gtk::TextView* text;
+    refBuilder-&gt;get_widget("text", text);
+    text-&gt;get_buffer()-&gt;set_text("Hello world!");
 }
 
 void
