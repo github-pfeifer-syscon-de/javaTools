@@ -144,6 +144,7 @@ public class Wizard extends JFrame {
         build = new JComboBox<>();
         build.addItem(new AutomakeBuild());
         build.addItem(new MesonBuild());
+        build.addItem(new CMakeBuild());
         build.setSelectedIndex(0);
         gbc = new GridBagConstraints(1,2, 1,1, 1.0,0.0, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL, ins, 0,0);
         add(build, gbc);
