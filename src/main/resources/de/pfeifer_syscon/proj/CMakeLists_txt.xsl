@@ -11,8 +11,8 @@
         <xsl:text>
 # build with:
 #  cmake -B build
-#  cmake -build build
-cmake_minimum_required(VERSION 4.0)
+#  cmake --build build
+cmake_minimum_required(VERSION 3.0...4.0)
 project(</xsl:text><xsl:value-of select="$Proj"/><xsl:text>)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -29,7 +29,5 @@ configure_file(config.h.in config.h @ONLY)
 add_subdirectory(res)
 add_subdirectory(src)
         </xsl:text>
-
     </xsl:template>
-
 </xsl:stylesheet>
