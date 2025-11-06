@@ -13,6 +13,16 @@ set(GRESOURCE_XML </xsl:text><xsl:value-of select="$proj"/><xsl:text>.gresources
 
 find_program(GLIB_COMPILE_RESOURCES NAMES glib-compile-resources REQUIRED)
 
+execute_process(COMMAND ${GLIB_COMPILE_RESOURCES} --generate-dependencies res/</xsl:text><xsl:value-of select="$proj"/><xsl:text>.gresources.xml
+    OUTPUT_VARIABLE RES_DEPENCIES
+    ERROR_VARIABLE RES_DEPENCIES
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+# convert newline seperators into list
+string(REPLACE "\n" ";" RES_DEPENCIES_LIST "${RES_DEPENCIES}")
+# message(STATUS "RES_DEPENCIES value: ${RES_DEPENCIES}")
+# message(STATUS "RES_DEPENCIES_LIST value: ${RES_DEPENCIES_LIST}")
+
 add_custom_command(
     OUTPUT ${GRESOURCE_C}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
@@ -24,10 +34,7 @@ add_custom_command(
     VERBATIM
     MAIN_DEPENDENCY ${GRESOURCE_XML}
     DEPENDS
-       abt-dlg.ui
-       app-menu.ui
-       app-win.ui
-       test.png
+        ${RES_DEPENCIES_LIST}
 )
 
 set_source_files_properties(${GRESOURCE_C}
