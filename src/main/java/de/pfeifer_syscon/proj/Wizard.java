@@ -52,32 +52,10 @@ public class Wizard extends JFrame {
         private File fProj;
         private BuildSystem buildSystem;
 
-        Worker() throws Exception {
-            String path = dir.getText();
-            String projName = proj.getText();
-            buildSystem = (BuildSystem)build.getSelectedItem();
-            File fPath = new File(path);
-            if (!fPath.exists()) {
-                throw new Exception(String.format("Path %s must exist", path));
-            }
-            fProj = new File(fPath, projName);
-            if (fProj.exists()) {
-                throw new Exception(String.format("Project dir %s must not exist", fProj.getPath()));
-            }
-            properties = new HashMap<>();
-            properties.put(Builder.PROJ, projName.toLowerCase());
-            properties.put("Proj", projName);
-            properties.put("PROJ", projName.toUpperCase());
-            properties.put("mail","RolandPf67@googlemail.com");
-            properties.put(Builder.CLASSAPP, projName + "App");
-            properties.put(Builder.CLASSWIN, projName + "Win");
-            properties.put("resPrefix", "/de/pfeifer_syscon/" + projName);
-            properties.put("appPrefix", "de.pfeifer_syscon." + projName);
-            properties.put("iconPng", projName.toLowerCase() + ".png");
-            Calendar cal = Calendar.getInstance();
-            properties.put("year", cal.get(Calendar.YEAR));
-            properties.put("author", "rpf");
-            properties.put("version", "0.1");
+        Worker(File fProj, Map<String, Object> properties, BuildSystem buildSystem) throws Exception {
+            this.fProj = fProj;
+            this.properties = properties;
+            this.buildSystem = buildSystem;
         }
 
         protected void create() throws Exception {
@@ -155,7 +133,33 @@ public class Wizard extends JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 try {
-                    Worker worker = new Worker();
+                    String path = dir.getText();
+                    String projName = proj.getText();
+                    BuildSystem buildSystem = (BuildSystem)build.getSelectedItem();
+                    File fPath = new File(path);
+                    if (!fPath.exists()) {
+                        throw new Exception(String.format("Path %s must exist", path));
+                    }
+                    File fProj = new File(fPath, projName);
+                    if (fProj.exists()) {
+                        throw new Exception(String.format("Project dir %s must not exist", fProj.getPath()));
+                    }
+                    HashMap<String, Object> properties = new HashMap<>();
+                    properties.put(Builder.PROJ, projName.toLowerCase());
+                    properties.put("PROJ", projName.toUpperCase());
+                    properties.put("Proj", projName);
+                    properties.put("mail","RolandPf67@googlemail.com");
+                    properties.put(Builder.CLASSAPP, projName + "App");
+                    properties.put(Builder.CLASSWIN, projName + "Win");
+                    properties.put("resPrefix", "/de/pfeifer_syscon/" + projName);
+                    properties.put("appPrefix", "de.pfeifer_syscon." + projName);
+                    properties.put("iconPng", projName.toLowerCase() + ".png");
+                    Calendar cal = Calendar.getInstance();
+                    properties.put("year", cal.get(Calendar.YEAR));
+                    properties.put("author", "rpf");
+                    properties.put("version", "0.1");
+
+                    Worker worker = new Worker(fProj, properties, buildSystem);
                     worker.execute();
                 }
                 catch (Exception exc) {
