@@ -9,9 +9,6 @@
 
     <xsl:template match="root">
         <xsl:text>
-# build with:
-#  cmake -B build
-#  cmake --build build
 cmake_minimum_required(VERSION 3.0...4.0)
 project(</xsl:text><xsl:value-of select="$Proj"/><xsl:text>)
 

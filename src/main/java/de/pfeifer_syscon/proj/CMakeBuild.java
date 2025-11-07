@@ -51,6 +51,12 @@ public class CMakeBuild extends BuildSystem {
         builder.xslt("CMakeLists_txt.xsl", cmakeTxt);
     }
 
+    public String[] getBuildInfo() {
+        return new String[] {
+            "cmake -B build"
+            ,"cmake --build build"};
+    }
+
     @Override
     public String toString() {
         return "CMake";

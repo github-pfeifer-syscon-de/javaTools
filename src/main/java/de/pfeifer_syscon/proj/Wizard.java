@@ -94,6 +94,8 @@ public class Wizard extends JFrame {
                 publish(String.format("Creating %s", build.toString()));
                 build.build(fProj, buildSystem);
             }
+            publish("Build with:");
+            publish(buildSystem.getBuildInfo());
             return new Object();
         }
 

@@ -49,6 +49,14 @@ public class MesonBuild extends BuildSystem {
     }
 
     @Override
+    public String[] getBuildInfo() {
+        return new String[] {
+            "meson setup build"
+            , " cd build"
+            , "meson compile" };
+    }
+    
+    @Override
     public String toString() {
         return "Meson";
     }

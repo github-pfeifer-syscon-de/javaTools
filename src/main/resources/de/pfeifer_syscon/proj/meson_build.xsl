@@ -9,11 +9,7 @@
 
 // this might be helpful: https://mesonbuild.com/Porting-from-autotools.html
    <xsl:template match="root">
-<xsl:text># use with:
-# meson setup build
-# cd build
-# meson compile
-
+<xsl:text>
 project('</xsl:text><xsl:value-of select="$Proj"/><xsl:text>', 'c', 'cpp', default_options: ['c_std=c11', 'cpp_std=c++20'] )
 
 subdir('res')

@@ -52,6 +52,11 @@ public class AutomakeBuild extends BuildSystem {
         builder.xslt("Makefile_am.xsl", resMake);
     }
 
+   public String[] getBuildInfo() {
+        return new String[] {
+            "autoreconf -fis"
+            ,"./configure --prefix=/usr"};
+    }
 
     public Builder[] getAdditionalBuilders(Map<String, Object> properties) throws Exception {
         return new Builder[] {new M4Builder(properties)};
