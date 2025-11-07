@@ -16,7 +16,9 @@
  */
 package de.pfeifer_syscon.proj;
 
+import de.pfeifer_syscon.proj.m4.M4Builder;
 import java.io.File;
+import java.util.Map;
 
 /**
  *
@@ -48,6 +50,11 @@ public class AutomakeBuild extends BuildSystem {
     public void buildRes(File fRes, Builder builder) throws Exception {
         File resMake = new File(fRes, "Makefile.am");
         builder.xslt("Makefile_am.xsl", resMake);
+    }
+
+
+    public Builder[] getAdditionalBuilders(Map<String, Object> properties) throws Exception {
+        return new Builder[] {new M4Builder(properties)};
     }
 
     @Override

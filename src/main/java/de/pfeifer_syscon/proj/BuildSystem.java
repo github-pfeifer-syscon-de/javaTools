@@ -17,6 +17,7 @@
 package de.pfeifer_syscon.proj;
 
 import java.io.File;
+import java.util.Map;
 
 /**
  *
@@ -31,5 +32,9 @@ public abstract class BuildSystem {
     public abstract void buildTest(File fTest, Builder builder) throws Exception;
 
     public abstract void buildRes(File fRes, Builder builder) throws Exception;
+
+    public Builder[] getAdditionalBuilders(Map<String, Object> properties) throws Exception {
+        return new Builder[] {};
+    }
 
 }

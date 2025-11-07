@@ -28,6 +28,7 @@ configure_file(config.h.in config.h @ONLY)
 
 add_subdirectory(res)
 add_subdirectory(src)
+add_subdirectory(test)
         </xsl:text>
     </xsl:template>
 </xsl:stylesheet>

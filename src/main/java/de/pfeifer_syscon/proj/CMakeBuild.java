@@ -41,6 +41,8 @@ public class CMakeBuild extends BuildSystem {
 
     @Override
     public void buildTest(File fTest, Builder builder) throws Exception {
+        File cmakeTxt = new File(fTest, "CMakeLists.txt");
+        builder.xslt("CMakeLists_txt.xsl", cmakeTxt);
     }
 
     @Override

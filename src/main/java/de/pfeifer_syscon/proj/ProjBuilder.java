@@ -42,6 +42,9 @@ public class ProjBuilder extends Builder {
         File readme = new File(fProj, "README");
         touch(readme, "");
         buildSystem.buildProj(fProj, this);
+        for (Builder builder : buildSystem.getAdditionalBuilders(properties)) {
+            builder.build(fProj, buildSystem);
+        }
     }
 
     @Override

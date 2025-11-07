@@ -13,11 +13,15 @@ set(GRESOURCE_XML </xsl:text><xsl:value-of select="$proj"/><xsl:text>.gresources
 
 find_program(GLIB_COMPILE_RESOURCES NAMES glib-compile-resources REQUIRED)
 
-execute_process(COMMAND ${GLIB_COMPILE_RESOURCES} --generate-dependencies res/</xsl:text><xsl:value-of select="$proj"/><xsl:text>.gresources.xml
+execute_process(COMMAND ${GLIB_COMPILE_RESOURCES} --generate-dependencies res/${GRESOURCE_XML}
     OUTPUT_VARIABLE RES_DEPENCIES
-    ERROR_VARIABLE RES_DEPENCIES
+    ERROR_VARIABLE RES_ERRORS
+    RESULT_VARIABLE RES_RESULT
     OUTPUT_STRIP_TRAILING_WHITESPACE
 )
+if (${RES_RESULT} GREATER 0)
+    message(FATAL_ERROR "compile resources returned: ${RES_ERRORS}")
+endif()
 # convert newline seperators into list
 string(REPLACE "\n" ";" RES_DEPENCIES_LIST "${RES_DEPENCIES}")
 # message(STATUS "RES_DEPENCIES value: ${RES_DEPENCIES}")

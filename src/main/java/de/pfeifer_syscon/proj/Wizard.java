@@ -16,7 +16,6 @@
  */
 package de.pfeifer_syscon.proj;
 
-import de.pfeifer_syscon.proj.m4.M4Builder;
 import de.pfeifer_syscon.proj.res.ResBuilder;
 import de.pfeifer_syscon.proj.src.SrcBuilder;
 import de.pfeifer_syscon.proj.test.TestBuilder;
@@ -91,8 +90,7 @@ public class Wizard extends JFrame {
                 new ProjBuilder(properties)
                 ,new SrcBuilder(properties)
                 ,new TestBuilder(properties)
-                ,new ResBuilder(properties)
-                ,new M4Builder(properties)}) {
+                ,new ResBuilder(properties)}) {
                 publish(String.format("Creating %s", build.toString()));
                 build.build(fProj, buildSystem);
             }
